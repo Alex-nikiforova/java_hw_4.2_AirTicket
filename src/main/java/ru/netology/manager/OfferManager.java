@@ -4,6 +4,7 @@ import ru.netology.domain.Offer;
 import ru.netology.repository.OfferRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class OfferManager {
     private final OfferRepository repository;
@@ -16,27 +17,17 @@ public class OfferManager {
         repository.save(item);
     }
 
-    public Offer[] searchBy(String text) {
+    public Offer[] searchBy(String from, String to, Comparator <Offer> comparator) {
         Offer[] result = new Offer[0];
-        for (Offer offer: repository.findAll()) {
-            if (matches(offer, text)) {
+        for (Offer offer : repository.findAll()) {
+            if (offer.getFrom().equalsIgnoreCase(from) & offer.getTo().equalsIgnoreCase(to)) {
                 Offer[] tmp = new Offer[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = offer;
                 result = tmp;
             }
         }
-        Arrays.sort(result);
+        Arrays.sort(result, comparator);
         return result;
-    }
-
-    public boolean matches(Offer offer, String search) {
-        if(offer.getFrom().equalsIgnoreCase(search)){
-            return true;
-        }
-        if(offer.getTo().equalsIgnoreCase(search)){
-            return true;
-        }
-        return false;
     }
 }
