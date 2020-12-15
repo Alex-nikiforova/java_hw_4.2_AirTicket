@@ -4,7 +4,6 @@ import ru.netology.domain.Offer;
 import ru.netology.repository.OfferRepository;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class OfferManager {
     private final OfferRepository repository;
