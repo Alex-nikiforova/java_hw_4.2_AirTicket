@@ -1,6 +1,6 @@
 package ru.netology.domain;
 
-public class Offer implements Comparable <Offer> {
+public class Offer implements Comparable<Offer> {
     private int id;
     private int price;
     private String from;
